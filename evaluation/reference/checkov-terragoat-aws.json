@@ -1,0 +1,1304 @@
+{
+ "summary": {
+  "passed": 115,
+  "failed": 215,
+  "skipped": 0,
+  "parsing_errors": 0,
+  "resource_count": 64,
+  "checkov_version": "3.3.29"
+ },
+ "results": {
+  "failed_checks": [
+   {
+    "check_id": "CKV_AWS_133",
+    "check_name": "Ensure that RDS instances has backup policy",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_129",
+    "check_name": "Ensure that respective logs of Amazon Relational Database Service (Amazon RDS) are enabled",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_226",
+    "check_name": "Ensure DB instance gets all minor upgrades automatically",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_16",
+    "check_name": "Ensure all data stored in the RDS is securely encrypted at rest",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_118",
+    "check_name": "Ensure that enhanced monitoring is enabled for Amazon RDS instances",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_161",
+    "check_name": "Ensure RDS database has IAM authentication enabled",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_293",
+    "check_name": "Ensure that AWS database instances have deletion protection enabled",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_157",
+    "check_name": "Ensure that RDS instances have Multi-AZ enabled",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_17",
+    "check_name": "Ensure all data stored in RDS is not publicly accessible",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_23",
+    "check_name": "Ensure every security group and rule has a description",
+    "resource": "aws_security_group.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_23",
+    "check_name": "Ensure every security group and rule has a description",
+    "resource": "aws_security_group_rule.ingress",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_23",
+    "check_name": "Ensure every security group and rule has a description",
+    "resource": "aws_security_group_rule.egress",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_382",
+    "check_name": "Ensure no security groups allow egress from 0.0.0.0:0 to port -1",
+    "resource": "aws_security_group_rule.egress",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_287",
+    "check_name": "Ensure IAM policies does not allow credentials exposure",
+    "resource": "aws_iam_role_policy.ec2policy",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_288",
+    "check_name": "Ensure IAM policies does not allow data exfiltration",
+    "resource": "aws_iam_role_policy.ec2policy",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_289",
+    "check_name": "Ensure IAM policies does not allow permissions management / resource exposure without constraints",
+    "resource": "aws_iam_role_policy.ec2policy",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_355",
+    "check_name": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+    "resource": "aws_iam_role_policy.ec2policy",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_290",
+    "check_name": "Ensure IAM policies does not allow write access without constraints",
+    "resource": "aws_iam_role_policy.ec2policy",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_126",
+    "check_name": "Ensure that detailed monitoring is enabled for EC2 instances",
+    "resource": "aws_instance.db_app",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_135",
+    "check_name": "Ensure that EC2 is EBS optimized",
+    "resource": "aws_instance.db_app",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_79",
+    "check_name": "Ensure Instance Metadata Service Version 1 is not enabled",
+    "resource": "aws_instance.db_app",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_8",
+    "check_name": "Ensure all data stored in the Launch configuration or instance Elastic Blocks Store is securely encrypted",
+    "resource": "aws_instance.db_app",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_46",
+    "check_name": "Ensure no hard-coded secrets exist in EC2 user data",
+    "resource": "aws_instance.web_host",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_126",
+    "check_name": "Ensure that detailed monitoring is enabled for EC2 instances",
+    "resource": "aws_instance.web_host",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_135",
+    "check_name": "Ensure that EC2 is EBS optimized",
+    "resource": "aws_instance.web_host",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_79",
+    "check_name": "Ensure Instance Metadata Service Version 1 is not enabled",
+    "resource": "aws_instance.web_host",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_8",
+    "check_name": "Ensure all data stored in the Launch configuration or instance Elastic Blocks Store is securely encrypted",
+    "resource": "aws_instance.web_host",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_3",
+    "check_name": "Ensure all data stored in the EBS is securely encrypted",
+    "resource": "aws_ebs_volume.web_host_storage",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_189",
+    "check_name": "Ensure EBS Volume is encrypted by KMS using a customer managed Key (CMK)",
+    "resource": "aws_ebs_volume.web_host_storage",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_23",
+    "check_name": "Ensure every security group and rule has a description",
+    "resource": "aws_security_group.web-node",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_382",
+    "check_name": "Ensure no security groups allow egress from 0.0.0.0:0 to port -1",
+    "resource": "aws_security_group.web-node",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_24",
+    "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22",
+    "resource": "aws_security_group.web-node",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_260",
+    "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+    "resource": "aws_security_group.web-node",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_130",
+    "check_name": "Ensure VPC subnets do not assign public IP by default",
+    "resource": "aws_subnet.web_subnet",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_130",
+    "check_name": "Ensure VPC subnets do not assign public IP by default",
+    "resource": "aws_subnet.web_subnet2",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_163",
+    "check_name": "Ensure ECR image scanning on push is enabled",
+    "resource": "aws_ecr_repository.repository",
+    "file_path": "\\ecr.tf"
+   },
+   {
+    "check_id": "CKV_AWS_51",
+    "check_name": "Ensure ECR Image Tags are immutable",
+    "resource": "aws_ecr_repository.repository",
+    "file_path": "\\ecr.tf"
+   },
+   {
+    "check_id": "CKV_AWS_136",
+    "check_name": "Ensure that ECR repositories are encrypted using KMS",
+    "resource": "aws_ecr_repository.repository",
+    "file_path": "\\ecr.tf"
+   },
+   {
+    "check_id": "CKV_AWS_130",
+    "check_name": "Ensure VPC subnets do not assign public IP by default",
+    "resource": "aws_subnet.eks_subnet1",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV_AWS_130",
+    "check_name": "Ensure VPC subnets do not assign public IP by default",
+    "resource": "aws_subnet.eks_subnet2",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV_AWS_37",
+    "check_name": "Ensure Amazon EKS control plane logging is enabled for all log types",
+    "resource": "aws_eks_cluster.eks_cluster",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV_AWS_39",
+    "check_name": "Ensure Amazon EKS public endpoint disabled",
+    "resource": "aws_eks_cluster.eks_cluster",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV_AWS_38",
+    "check_name": "Ensure Amazon EKS public endpoint not accessible to 0.0.0.0/0",
+    "resource": "aws_eks_cluster.eks_cluster",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV_AWS_58",
+    "check_name": "Ensure EKS Cluster has Secrets Encryption Enabled",
+    "resource": "aws_eks_cluster.eks_cluster",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV_AWS_92",
+    "check_name": "Ensure the ELB has access logging enabled",
+    "resource": "aws_elb.weblb",
+    "file_path": "\\elb.tf"
+   },
+   {
+    "check_id": "CKV_AWS_127",
+    "check_name": "Ensure that Elastic Load Balancer(s) uses SSL certificates provided by AWS Certificate Manager",
+    "resource": "aws_elb.weblb",
+    "file_path": "\\elb.tf"
+   },
+   {
+    "check_id": "CKV_AWS_376",
+    "check_name": "Ensure AWS Elastic Load Balancer listener uses TLS/SSL",
+    "resource": "aws_elb.weblb",
+    "file_path": "\\elb.tf"
+   },
+   {
+    "check_id": "CKV_AWS_109",
+    "check_name": "Ensure IAM policies does not allow permissions management / resource exposure without constraints",
+    "resource": "aws_iam_policy_document.policy",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_283",
+    "check_name": "Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource",
+    "resource": "aws_iam_policy_document.policy",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_111",
+    "check_name": "Ensure IAM policies does not allow write access without constraints",
+    "resource": "aws_iam_policy_document.policy",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_356",
+    "check_name": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+    "resource": "aws_iam_policy_document.policy",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_248",
+    "check_name": "Ensure that Elasticsearch is not using the default Security Group",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_317",
+    "check_name": "Ensure Elasticsearch Domain Audit Logging is enabled",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_318",
+    "check_name": "Ensure Elasticsearch domains are configured with at least three dedicated master nodes for HA",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_84",
+    "check_name": "Ensure Elasticsearch Domain Logging is enabled",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_5",
+    "check_name": "Ensure all data stored in the Elasticsearch is securely encrypted at rest",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_247",
+    "check_name": "Ensure all data stored in the Elasticsearch is encrypted with a CMK",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_137",
+    "check_name": "Ensure that Elasticsearch is configured inside a VPC",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_228",
+    "check_name": "Verify Elasticsearch domain is using an up to date TLS policy",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV_AWS_273",
+    "check_name": "Ensure access is controlled through SSO and not AWS IAM defined users",
+    "resource": "aws_iam_user.user",
+    "file_path": "\\iam.tf"
+   },
+   {
+    "check_id": "CKV_AWS_287",
+    "check_name": "Ensure IAM policies does not allow credentials exposure",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file_path": "\\iam.tf"
+   },
+   {
+    "check_id": "CKV_AWS_288",
+    "check_name": "Ensure IAM policies does not allow data exfiltration",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file_path": "\\iam.tf"
+   },
+   {
+    "check_id": "CKV_AWS_289",
+    "check_name": "Ensure IAM policies does not allow permissions management / resource exposure without constraints",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file_path": "\\iam.tf"
+   },
+   {
+    "check_id": "CKV_AWS_286",
+    "check_name": "Ensure IAM policies does not allow privilege escalation",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file_path": "\\iam.tf"
+   },
+   {
+    "check_id": "CKV_AWS_355",
+    "check_name": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file_path": "\\iam.tf"
+   },
+   {
+    "check_id": "CKV_AWS_290",
+    "check_name": "Ensure IAM policies does not allow write access without constraints",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file_path": "\\iam.tf"
+   },
+   {
+    "check_id": "CKV_AWS_7",
+    "check_name": "Ensure rotation for customer created CMKs is enabled",
+    "resource": "aws_kms_key.logs_key",
+    "file_path": "\\kms.tf"
+   },
+   {
+    "check_id": "CKV_AWS_363",
+    "check_name": "Ensure Lambda Runtime is not deprecated",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_272",
+    "check_name": "Ensure AWS Lambda function is configured to validate code-signing",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_116",
+    "check_name": "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_45",
+    "check_name": "Ensure no hard-coded secrets exist in lambda environment",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_173",
+    "check_name": "Check encryption settings for Lambda environmental variable",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_115",
+    "check_name": "Ensure that AWS Lambda function is configured for function-level concurrent execution limit",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_117",
+    "check_name": "Ensure that AWS Lambda function is configured inside a VPC",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_50",
+    "check_name": "X-Ray tracing is enabled for Lambda",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file_path": "\\lambda.tf"
+   },
+   {
+    "check_id": "CKV_AWS_361",
+    "check_name": "Ensure that Neptune DB cluster has automated backups enabled with adequate retention",
+    "resource": "aws_neptune_cluster.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_347",
+    "check_name": "Ensure Neptune is encrypted by KMS using a customer managed Key (CMK)",
+    "resource": "aws_neptune_cluster.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_101",
+    "check_name": "Ensure Neptune logging is enabled",
+    "resource": "aws_neptune_cluster.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_44",
+    "check_name": "Ensure Neptune storage is securely encrypted",
+    "resource": "aws_neptune_cluster.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_362",
+    "check_name": "Neptune DB clusters should be configured to copy tags to snapshots",
+    "resource": "aws_neptune_cluster.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_359",
+    "check_name": "Neptune DB clusters should have IAM database authentication enabled",
+    "resource": "aws_neptune_cluster.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_279",
+    "check_name": "Ensure Neptune snapshot is securely encrypted",
+    "resource": "aws_neptune_cluster_snapshot.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_280",
+    "check_name": "Ensure Neptune snapshot is encrypted by KMS using a customer managed Key (CMK)",
+    "resource": "aws_neptune_cluster_snapshot.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV_AWS_41",
+    "check_name": "Ensure no hard coded AWS access key and secret key exists in provider",
+    "resource": "aws.plain_text_access_keys_provider",
+    "file_path": "\\providers.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_133",
+    "check_name": "Ensure that RDS instances has backup policy",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_96",
+    "check_name": "Ensure all data stored in Aurora is securely encrypted at rest",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_325",
+    "check_name": "Ensure that RDS Cluster audit logging is enabled for MySQL engine",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_326",
+    "check_name": "Ensure that RDS Aurora Clusters have backtracking enabled",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_313",
+    "check_name": "Ensure RDS cluster configured to copy tags to snapshots",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_327",
+    "check_name": "Ensure RDS Clusters are encrypted using KMS CMKs",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_162",
+    "check_name": "Ensure RDS cluster has IAM authentication enabled",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_324",
+    "check_name": "Ensure that RDS Cluster log capture is enabled",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_139",
+    "check_name": "Ensure that RDS clusters have deletion protection enabled",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV_AWS_186",
+    "check_name": "Ensure S3 bucket Object is encrypted by KMS using a customer managed Key (CMK)",
+    "resource": "aws_s3_bucket_object.data_object",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_52",
+    "check_name": "Ensure AWS ElasticSearch/OpenSearch Fine-grained access control is enabled",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_8",
+    "check_name": "Ensure that RDS clusters has backup plan of AWS Backup",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file_path": "\\rds.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_60",
+    "check_name": "Ensure RDS instance with copy tags to snapshots is enabled",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_62",
+    "check_name": "Ensure S3 buckets should have event notifications enabled",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_62",
+    "check_name": "Ensure S3 buckets should have event notifications enabled",
+    "resource": "aws_s3_bucket.data",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_62",
+    "check_name": "Ensure S3 buckets should have event notifications enabled",
+    "resource": "aws_s3_bucket.financials",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_62",
+    "check_name": "Ensure S3 buckets should have event notifications enabled",
+    "resource": "aws_s3_bucket.operations",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_62",
+    "check_name": "Ensure S3 buckets should have event notifications enabled",
+    "resource": "aws_s3_bucket.data_science",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_62",
+    "check_name": "Ensure S3 buckets should have event notifications enabled",
+    "resource": "aws_s3_bucket.logs",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_6",
+    "check_name": "Ensure that S3 bucket has a Public Access block",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_6",
+    "check_name": "Ensure that S3 bucket has a Public Access block",
+    "resource": "aws_s3_bucket.data",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_6",
+    "check_name": "Ensure that S3 bucket has a Public Access block",
+    "resource": "aws_s3_bucket.financials",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_6",
+    "check_name": "Ensure that S3 bucket has a Public Access block",
+    "resource": "aws_s3_bucket.operations",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_6",
+    "check_name": "Ensure that S3 bucket has a Public Access block",
+    "resource": "aws_s3_bucket.data_science",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_6",
+    "check_name": "Ensure that S3 bucket has a Public Access block",
+    "resource": "aws_s3_bucket.logs",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_2",
+    "check_name": "Ensure that only encrypted EBS volumes are attached to EC2 instances",
+    "resource": "aws_ebs_volume.web_host_storage",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_64",
+    "check_name": "Ensure KMS key Policy is defined",
+    "resource": "aws_kms_key.logs_key",
+    "file_path": "\\kms.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_59",
+    "check_name": "Ensure ElasticSearch/OpenSearch has dedicated master node enabled",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file_path": "\\es.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_58",
+    "check_name": "Ensure AWS Neptune cluster deletion protection is enabled",
+    "resource": "aws_neptune_cluster.default",
+    "file_path": "\\neptune.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_41",
+    "check_name": "Ensure an IAM role is attached to EC2 instance",
+    "resource": "aws_instance.web_host",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_11",
+    "check_name": "Ensure VPC flow logging is enabled in all VPCs",
+    "resource": "aws_vpc.eks_vpc",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_12",
+    "check_name": "Ensure the default security group of every VPC restricts all traffic",
+    "resource": "aws_vpc.web_vpc",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_12",
+    "check_name": "Ensure the default security group of every VPC restricts all traffic",
+    "resource": "aws_vpc.eks_vpc",
+    "file_path": "\\eks.tf"
+   },
+   {
+    "check_id": "CKV_AWS_144",
+    "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_144",
+    "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+    "resource": "aws_s3_bucket.data",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_144",
+    "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+    "resource": "aws_s3_bucket.financials",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_144",
+    "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+    "resource": "aws_s3_bucket.operations",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_144",
+    "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+    "resource": "aws_s3_bucket.data_science",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_144",
+    "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+    "resource": "aws_s3_bucket.logs",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_69",
+    "check_name": "Ensure AWS RDS database instance configured with encryption in transit",
+    "resource": "aws_db_instance.default",
+    "file_path": "\\db-app.tf"
+   },
+   {
+    "check_id": "CKV_AWS_18",
+    "check_name": "Ensure the S3 bucket has access logging enabled",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_18",
+    "check_name": "Ensure the S3 bucket has access logging enabled",
+    "resource": "aws_s3_bucket.data",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_18",
+    "check_name": "Ensure the S3 bucket has access logging enabled",
+    "resource": "aws_s3_bucket.financials",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_18",
+    "check_name": "Ensure the S3 bucket has access logging enabled",
+    "resource": "aws_s3_bucket.operations",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_18",
+    "check_name": "Ensure the S3 bucket has access logging enabled",
+    "resource": "aws_s3_bucket.logs",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_61",
+    "check_name": "Ensure that an S3 bucket has a lifecycle configuration",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_61",
+    "check_name": "Ensure that an S3 bucket has a lifecycle configuration",
+    "resource": "aws_s3_bucket.data",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_61",
+    "check_name": "Ensure that an S3 bucket has a lifecycle configuration",
+    "resource": "aws_s3_bucket.financials",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_61",
+    "check_name": "Ensure that an S3 bucket has a lifecycle configuration",
+    "resource": "aws_s3_bucket.operations",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_61",
+    "check_name": "Ensure that an S3 bucket has a lifecycle configuration",
+    "resource": "aws_s3_bucket.data_science",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV2_AWS_61",
+    "check_name": "Ensure that an S3 bucket has a lifecycle configuration",
+    "resource": "aws_s3_bucket.logs",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_145",
+    "check_name": "Ensure that S3 buckets are encrypted with KMS by default",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_145",
+    "check_name": "Ensure that S3 buckets are encrypted with KMS by default",
+    "resource": "aws_s3_bucket.data",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_145",
+    "check_name": "Ensure that S3 buckets are encrypted with KMS by default",
+    "resource": "aws_s3_bucket.financials",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_145",
+    "check_name": "Ensure that S3 buckets are encrypted with KMS by default",
+    "resource": "aws_s3_bucket.operations",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_145",
+    "check_name": "Ensure that S3 buckets are encrypted with KMS by default",
+    "resource": "aws_s3_bucket.data_science",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_21",
+    "check_name": "Ensure all data stored in the S3 bucket have versioning enabled",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file_path": "\\ec2.tf"
+   },
+   {
+    "check_id": "CKV_AWS_21",
+    "check_name": "Ensure all data stored in the S3 bucket have versioning enabled",
+    "resource": "aws_s3_bucket.data",
+    "file_path": "\\s3.tf"
+   },
+   {
+    "check_id": "CKV_AWS_21",
+    "check_name": "Ensure all data stored in the S3 bucket have versioning enabled",
+    "resource": "aws_s3_bucket.financials",
+    "file_path": "\\s3.tf"
+   }
+  ]
+ }
+}

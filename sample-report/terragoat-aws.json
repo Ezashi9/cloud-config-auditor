@@ -1,0 +1,562 @@
+[
+  {
+    "check": "CCA-001",
+    "title": "Hard-coded AWS access keys",
+    "severity": "critical",
+    "resource": "aws_instance.web_host",
+    "file": "ec2.tf",
+    "line": 1,
+    "detail": "AWS access key AKIA...MAAA written in plain text",
+    "fix": "Delete the keys, rotate them immediately, and use IAM roles or a secrets manager instead."
+  },
+  {
+    "check": "CCA-001",
+    "title": "Hard-coded AWS access keys",
+    "severity": "critical",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file": "lambda.tf",
+    "line": 32,
+    "detail": "AWS access key AKIA...MPLE written in plain text",
+    "fix": "Delete the keys, rotate them immediately, and use IAM roles or a secrets manager instead."
+  },
+  {
+    "check": "CCA-001",
+    "title": "Hard-coded AWS access keys",
+    "severity": "critical",
+    "resource": "provider.aws.plain_text_access_keys_provider",
+    "file": "providers.tf",
+    "line": 8,
+    "detail": "AWS access key AKIA...MPLE written in plain text",
+    "fix": "Delete the keys, rotate them immediately, and use IAM roles or a secrets manager instead."
+  },
+  {
+    "check": "CCA-001",
+    "title": "Hard-coded AWS access keys",
+    "severity": "critical",
+    "resource": "provider.aws.plain_text_access_keys_provider",
+    "file": "providers.tf",
+    "line": 8,
+    "detail": "AWS secret key written in plain text in the provider block",
+    "fix": "Delete the keys, rotate them immediately, and use IAM roles or a secrets manager instead."
+  },
+  {
+    "check": "CCA-003",
+    "title": "Secrets in Lambda environment variables",
+    "severity": "high",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file": "lambda.tf",
+    "line": 32,
+    "detail": "environment variable 'access_key' holds a plain-text secret",
+    "fix": "Store the secret in Secrets Manager or SSM Parameter Store and fetch it at runtime."
+  },
+  {
+    "check": "CCA-003",
+    "title": "Secrets in Lambda environment variables",
+    "severity": "high",
+    "resource": "aws_lambda_function.analysis_lambda",
+    "file": "lambda.tf",
+    "line": 32,
+    "detail": "environment variable 'secret_key' holds a plain-text secret",
+    "fix": "Store the secret in Secrets Manager or SSM Parameter Store and fetch it at runtime."
+  },
+  {
+    "check": "CCA-004",
+    "title": "Secrets in EC2 user data",
+    "severity": "high",
+    "resource": "aws_instance.db_app",
+    "file": "db-app.tf",
+    "line": 243,
+    "detail": "start-up script embeds the secret ${var.password}, which Terraform renders into user data in plain text",
+    "fix": "Fetch secrets at boot from Secrets Manager using the instance's IAM role."
+  },
+  {
+    "check": "CCA-004",
+    "title": "Secrets in EC2 user data",
+    "severity": "high",
+    "resource": "aws_instance.web_host",
+    "file": "ec2.tf",
+    "line": 1,
+    "detail": "start-up script sets 'secret' in plain text",
+    "fix": "Fetch secrets at boot from Secrets Manager using the instance's IAM role."
+  },
+  {
+    "check": "CCA-010",
+    "title": "Admin port open to the internet",
+    "severity": "high",
+    "resource": "aws_security_group.web-node",
+    "file": "ec2.tf",
+    "line": 77,
+    "detail": "SSH (port 22) open to the whole internet",
+    "fix": "Allow only known IP ranges, or remove the port and use AWS Systems Manager Session Manager."
+  },
+  {
+    "check": "CCA-030",
+    "title": "Database publicly accessible",
+    "severity": "high",
+    "resource": "aws_db_instance.default",
+    "file": "db-app.tf",
+    "line": 1,
+    "detail": "database is reachable from the internet (publicly_accessible = true)",
+    "fix": "Set publicly_accessible = false and reach it through the application or a bastion."
+  },
+  {
+    "check": "CCA-050",
+    "title": "Over-broad IAM policy",
+    "severity": "high",
+    "resource": "aws_iam_role_policy.ec2policy",
+    "file": "db-app.tf",
+    "line": 206,
+    "detail": "allows all actions in ec2:*, rds:*, s3:* on every resource",
+    "fix": "List only the specific actions and resources the role needs."
+  },
+  {
+    "check": "CCA-050",
+    "title": "Over-broad IAM policy",
+    "severity": "high",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file": "iam.tf",
+    "line": 25,
+    "detail": "allows all actions in cloudwatch:*, ec2:*, lambda:*, s3:* on every resource",
+    "fix": "List only the specific actions and resources the role needs."
+  },
+  {
+    "check": "CCA-021",
+    "title": "S3 Block Public Access not configured",
+    "severity": "medium",
+    "resource": "aws_s3_bucket.data",
+    "file": "s3.tf",
+    "line": 1,
+    "detail": "no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it",
+    "fix": "Add aws_s3_bucket_public_access_block with all four settings true."
+  },
+  {
+    "check": "CCA-021",
+    "title": "S3 Block Public Access not configured",
+    "severity": "medium",
+    "resource": "aws_s3_bucket.data_science",
+    "file": "s3.tf",
+    "line": 89,
+    "detail": "no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it",
+    "fix": "Add aws_s3_bucket_public_access_block with all four settings true."
+  },
+  {
+    "check": "CCA-021",
+    "title": "S3 Block Public Access not configured",
+    "severity": "medium",
+    "resource": "aws_s3_bucket.financials",
+    "file": "s3.tf",
+    "line": 42,
+    "detail": "no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it",
+    "fix": "Add aws_s3_bucket_public_access_block with all four settings true."
+  },
+  {
+    "check": "CCA-021",
+    "title": "S3 Block Public Access not configured",
+    "severity": "medium",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file": "ec2.tf",
+    "line": 271,
+    "detail": "no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it",
+    "fix": "Add aws_s3_bucket_public_access_block with all four settings true."
+  },
+  {
+    "check": "CCA-021",
+    "title": "S3 Block Public Access not configured",
+    "severity": "medium",
+    "resource": "aws_s3_bucket.logs",
+    "file": "s3.tf",
+    "line": 113,
+    "detail": "no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it",
+    "fix": "Add aws_s3_bucket_public_access_block with all four settings true."
+  },
+  {
+    "check": "CCA-021",
+    "title": "S3 Block Public Access not configured",
+    "severity": "medium",
+    "resource": "aws_s3_bucket.operations",
+    "file": "s3.tf",
+    "line": 65,
+    "detail": "no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it",
+    "fix": "Add aws_s3_bucket_public_access_block with all four settings true."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_db_instance.default",
+    "file": "db-app.tf",
+    "line": 1,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_neptune_cluster.default",
+    "file": "neptune.tf",
+    "line": 1,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file": "rds.tf",
+    "line": 1,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app2-rds-cluster",
+    "file": "rds.tf",
+    "line": 17,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app3-rds-cluster",
+    "file": "rds.tf",
+    "line": 33,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app4-rds-cluster",
+    "file": "rds.tf",
+    "line": 49,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app5-rds-cluster",
+    "file": "rds.tf",
+    "line": 65,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app6-rds-cluster",
+    "file": "rds.tf",
+    "line": 81,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app7-rds-cluster",
+    "file": "rds.tf",
+    "line": 97,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app8-rds-cluster",
+    "file": "rds.tf",
+    "line": 113,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-031",
+    "title": "Database storage not encrypted",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app9-rds-cluster",
+    "file": "rds.tf",
+    "line": 130,
+    "detail": "database storage is not encrypted at rest",
+    "fix": "Set storage_encrypted = true (ideally with your own KMS key)."
+  },
+  {
+    "check": "CCA-032",
+    "title": "Database backups disabled",
+    "severity": "medium",
+    "resource": "aws_db_instance.default",
+    "file": "db-app.tf",
+    "line": 1,
+    "detail": "automated backups are disabled (backup_retention_period = 0)",
+    "fix": "Set backup_retention_period to at least 7 days."
+  },
+  {
+    "check": "CCA-032",
+    "title": "Database backups disabled",
+    "severity": "medium",
+    "resource": "aws_rds_cluster.app1-rds-cluster",
+    "file": "rds.tf",
+    "line": 1,
+    "detail": "automated backups are disabled (backup_retention_period = 0)",
+    "fix": "Set backup_retention_period to at least 7 days."
+  },
+  {
+    "check": "CCA-040",
+    "title": "EBS volume not encrypted",
+    "severity": "medium",
+    "resource": "aws_ebs_volume.web_host_storage",
+    "file": "ec2.tf",
+    "line": 34,
+    "detail": "volume is not encrypted, so a snapshot or detached disk exposes its data",
+    "fix": "Set encrypted = true, or turn on EBS encryption by default for the account."
+  },
+  {
+    "check": "CCA-041",
+    "title": "Snapshot of an unencrypted volume",
+    "severity": "medium",
+    "resource": "aws_ebs_snapshot.example_snapshot",
+    "file": "ec2.tf",
+    "line": 53,
+    "detail": "snapshot of the unencrypted volume aws_ebs_volume.web_host_storage, so the copy is unencrypted too",
+    "fix": "Encrypt the source volume, or copy the snapshot with encryption on."
+  },
+  {
+    "check": "CCA-042",
+    "title": "Instance metadata allows IMDSv1",
+    "severity": "medium",
+    "resource": "aws_instance.db_app",
+    "file": "db-app.tf",
+    "line": 243,
+    "detail": "instance metadata allows IMDSv1, so an SSRF bug in the app could steal the instance's AWS credentials",
+    "fix": "Set metadata_options { http_tokens = \"required\" } to enforce IMDSv2."
+  },
+  {
+    "check": "CCA-042",
+    "title": "Instance metadata allows IMDSv1",
+    "severity": "medium",
+    "resource": "aws_instance.web_host",
+    "file": "ec2.tf",
+    "line": 1,
+    "detail": "instance metadata allows IMDSv1, so an SSRF bug in the app could steal the instance's AWS credentials",
+    "fix": "Set metadata_options { http_tokens = \"required\" } to enforce IMDSv2."
+  },
+  {
+    "check": "CCA-052",
+    "title": "Long-lived IAM access key in Terraform",
+    "severity": "medium",
+    "resource": "aws_iam_access_key.user",
+    "file": "iam.tf",
+    "line": 21,
+    "detail": "creates a long-lived access key; its secret is stored in plain text in the Terraform state file",
+    "fix": "Use IAM roles or AWS IAM Identity Center (SSO) instead of access keys."
+  },
+  {
+    "check": "CCA-061",
+    "title": "Search domain not encrypted at rest",
+    "severity": "medium",
+    "resource": "aws_elasticsearch_domain.monitoring-framework",
+    "file": "es.tf",
+    "line": 1,
+    "detail": "search domain data is not encrypted at rest",
+    "fix": "Enable encrypt_at_rest."
+  },
+  {
+    "check": "CCA-062",
+    "title": "Load balancer without TLS",
+    "severity": "medium",
+    "resource": "aws_elb.weblb",
+    "file": "elb.tf",
+    "line": 2,
+    "detail": "load balancer listens without TLS, so traffic is readable in transit",
+    "fix": "Use an HTTPS/TLS listener with an ACM certificate and redirect HTTP to HTTPS."
+  },
+  {
+    "check": "CCA-063",
+    "title": "Kubernetes API endpoint public",
+    "severity": "medium",
+    "resource": "aws_eks_cluster.eks_cluster",
+    "file": "eks.tf",
+    "line": 1,
+    "detail": "Kubernetes API endpoint is reachable from the internet (the default when not set)",
+    "fix": "Set endpoint_public_access = false, or restrict public_access_cidrs."
+  },
+  {
+    "check": "CCA-022",
+    "title": "S3 versioning disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.data",
+    "file": "s3.tf",
+    "line": 1,
+    "detail": "versioning is off, so overwritten or deleted objects (e.g. by ransomware) can't be recovered",
+    "fix": "Enable versioning (aws_s3_bucket_versioning)."
+  },
+  {
+    "check": "CCA-022",
+    "title": "S3 versioning disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.financials",
+    "file": "s3.tf",
+    "line": 42,
+    "detail": "versioning is off, so overwritten or deleted objects (e.g. by ransomware) can't be recovered",
+    "fix": "Enable versioning (aws_s3_bucket_versioning)."
+  },
+  {
+    "check": "CCA-022",
+    "title": "S3 versioning disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file": "ec2.tf",
+    "line": 271,
+    "detail": "versioning is off, so overwritten or deleted objects (e.g. by ransomware) can't be recovered",
+    "fix": "Enable versioning (aws_s3_bucket_versioning)."
+  },
+  {
+    "check": "CCA-023",
+    "title": "S3 access logging disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.data",
+    "file": "s3.tf",
+    "line": 1,
+    "detail": "access logging is off, so there's no record of who read or changed data",
+    "fix": "Enable server access logging to a separate log bucket."
+  },
+  {
+    "check": "CCA-023",
+    "title": "S3 access logging disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.financials",
+    "file": "s3.tf",
+    "line": 42,
+    "detail": "access logging is off, so there's no record of who read or changed data",
+    "fix": "Enable server access logging to a separate log bucket."
+  },
+  {
+    "check": "CCA-023",
+    "title": "S3 access logging disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file": "ec2.tf",
+    "line": 271,
+    "detail": "access logging is off, so there's no record of who read or changed data",
+    "fix": "Enable server access logging to a separate log bucket."
+  },
+  {
+    "check": "CCA-023",
+    "title": "S3 access logging disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.logs",
+    "file": "s3.tf",
+    "line": 113,
+    "detail": "access logging is off, so there's no record of who read or changed data",
+    "fix": "Enable server access logging to a separate log bucket."
+  },
+  {
+    "check": "CCA-023",
+    "title": "S3 access logging disabled",
+    "severity": "low",
+    "resource": "aws_s3_bucket.operations",
+    "file": "s3.tf",
+    "line": 65,
+    "detail": "access logging is off, so there's no record of who read or changed data",
+    "fix": "Enable server access logging to a separate log bucket."
+  },
+  {
+    "check": "CCA-024",
+    "title": "S3 bucket without a customer-managed KMS key",
+    "severity": "low",
+    "resource": "aws_s3_bucket.data",
+    "file": "s3.tf",
+    "line": 1,
+    "detail": "only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data",
+    "fix": "Configure default encryption with sse_algorithm = aws:kms and your own key."
+  },
+  {
+    "check": "CCA-024",
+    "title": "S3 bucket without a customer-managed KMS key",
+    "severity": "low",
+    "resource": "aws_s3_bucket.data_science",
+    "file": "s3.tf",
+    "line": 89,
+    "detail": "only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data",
+    "fix": "Configure default encryption with sse_algorithm = aws:kms and your own key."
+  },
+  {
+    "check": "CCA-024",
+    "title": "S3 bucket without a customer-managed KMS key",
+    "severity": "low",
+    "resource": "aws_s3_bucket.financials",
+    "file": "s3.tf",
+    "line": 42,
+    "detail": "only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data",
+    "fix": "Configure default encryption with sse_algorithm = aws:kms and your own key."
+  },
+  {
+    "check": "CCA-024",
+    "title": "S3 bucket without a customer-managed KMS key",
+    "severity": "low",
+    "resource": "aws_s3_bucket.flowbucket",
+    "file": "ec2.tf",
+    "line": 271,
+    "detail": "only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data",
+    "fix": "Configure default encryption with sse_algorithm = aws:kms and your own key."
+  },
+  {
+    "check": "CCA-024",
+    "title": "S3 bucket without a customer-managed KMS key",
+    "severity": "low",
+    "resource": "aws_s3_bucket.operations",
+    "file": "s3.tf",
+    "line": 65,
+    "detail": "only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data",
+    "fix": "Configure default encryption with sse_algorithm = aws:kms and your own key."
+  },
+  {
+    "check": "CCA-051",
+    "title": "IAM policy attached directly to a user",
+    "severity": "low",
+    "resource": "aws_iam_user_policy.userpolicy",
+    "file": "iam.tf",
+    "line": 25,
+    "detail": "permissions attached straight to a user instead of a group or role, which is hard to review and revoke",
+    "fix": "Attach policies to groups or roles and put users in groups."
+  },
+  {
+    "check": "CCA-060",
+    "title": "KMS key rotation disabled",
+    "severity": "low",
+    "resource": "aws_kms_key.logs_key",
+    "file": "kms.tf",
+    "line": 1,
+    "detail": "automatic key rotation is off",
+    "fix": "Set enable_key_rotation = true."
+  },
+  {
+    "check": "CCA-064",
+    "title": "Weak container registry settings",
+    "severity": "low",
+    "resource": "aws_ecr_repository.repository",
+    "file": "ecr.tf",
+    "line": 1,
+    "detail": "image tags can be overwritten, so a tag like 'latest' could be swapped for a malicious image",
+    "fix": "Set image_tag_mutability = IMMUTABLE and scan_on_push = true."
+  },
+  {
+    "check": "CCA-064",
+    "title": "Weak container registry settings",
+    "severity": "low",
+    "resource": "aws_ecr_repository.repository",
+    "file": "ecr.tf",
+    "line": 1,
+    "detail": "images aren't scanned for vulnerabilities on push",
+    "fix": "Set image_tag_mutability = IMMUTABLE and scan_on_push = true."
+  }
+]

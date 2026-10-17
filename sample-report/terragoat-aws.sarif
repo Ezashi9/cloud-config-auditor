@@ -1,0 +1,1498 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "cloud-config-auditor",
+          "informationUri": "https://github.com/Ezashi9/cloud-config-auditor",
+          "rules": [
+            {
+              "id": "CCA-001",
+              "name": "Hard-codedAWSaccesskeys",
+              "shortDescription": {
+                "text": "Hard-coded AWS access keys"
+              },
+              "fullDescription": {
+                "text": "Anyone who can read the code (or its history) can use the keys to act as you in AWS."
+              },
+              "help": {
+                "text": "Delete the keys, rotate them immediately, and use IAM roles or a secrets manager instead."
+              },
+              "properties": {
+                "security-severity": "9.5"
+              }
+            },
+            {
+              "id": "CCA-002",
+              "name": "Hard-codeddatabasepassword",
+              "shortDescription": {
+                "text": "Hard-coded database password"
+              },
+              "fullDescription": {
+                "text": "The password ends up in version control and the Terraform state file."
+              },
+              "help": {
+                "text": "Generate it with a secrets manager (e.g. AWS Secrets Manager, or manage_master_user_password) and reference it."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-003",
+              "name": "SecretsinLambdaenvironmentvariables",
+              "shortDescription": {
+                "text": "Secrets in Lambda environment variables"
+              },
+              "fullDescription": {
+                "text": "Environment variables are visible to anyone with read access to the function configuration."
+              },
+              "help": {
+                "text": "Store the secret in Secrets Manager or SSM Parameter Store and fetch it at runtime."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-004",
+              "name": "SecretsinEC2userdata",
+              "shortDescription": {
+                "text": "Secrets in EC2 user data"
+              },
+              "fullDescription": {
+                "text": "User data is readable from the instance metadata service and the AWS console."
+              },
+              "help": {
+                "text": "Fetch secrets at boot from Secrets Manager using the instance's IAM role."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-010",
+              "name": "Adminportopentotheinternet",
+              "shortDescription": {
+                "text": "Admin port open to the internet"
+              },
+              "fullDescription": {
+                "text": "SSH and RDP exposed to the world are hit by constant brute-force attacks (see Log Hunter)."
+              },
+              "help": {
+                "text": "Allow only known IP ranges, or remove the port and use AWS Systems Manager Session Manager."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-011",
+              "name": "Databaseportopentotheinternet",
+              "shortDescription": {
+                "text": "Database port open to the internet"
+              },
+              "fullDescription": {
+                "text": "Databases should never be directly reachable from the internet."
+              },
+              "help": {
+                "text": "Allow the port only from the application's security group."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-012",
+              "name": "Allportsopentotheinternet",
+              "shortDescription": {
+                "text": "All ports open to the internet"
+              },
+              "fullDescription": {
+                "text": "Every service on the machine becomes reachable by anyone."
+              },
+              "help": {
+                "text": "List only the ports the service needs, from the sources that need them."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-020",
+              "name": "PublicS3bucketACL",
+              "shortDescription": {
+                "text": "Public S3 bucket ACL"
+              },
+              "fullDescription": {
+                "text": "Public buckets are one of the most common causes of cloud data leaks."
+              },
+              "help": {
+                "text": "Set the ACL to private and turn on S3 Block Public Access."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-021",
+              "name": "S3BlockPublicAccessnotconfigured",
+              "shortDescription": {
+                "text": "S3 Block Public Access not configured"
+              },
+              "fullDescription": {
+                "text": "Without it, one mistaken ACL or bucket policy can make data public."
+              },
+              "help": {
+                "text": "Add aws_s3_bucket_public_access_block with all four settings true."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-022",
+              "name": "S3versioningdisabled",
+              "shortDescription": {
+                "text": "S3 versioning disabled"
+              },
+              "fullDescription": {
+                "text": "Deleted or overwritten objects can't be recovered after a mistake or ransomware."
+              },
+              "help": {
+                "text": "Enable versioning (aws_s3_bucket_versioning)."
+              },
+              "properties": {
+                "security-severity": "3.0"
+              }
+            },
+            {
+              "id": "CCA-023",
+              "name": "S3accessloggingdisabled",
+              "shortDescription": {
+                "text": "S3 access logging disabled"
+              },
+              "fullDescription": {
+                "text": "Without logs you can't investigate who accessed data during an incident."
+              },
+              "help": {
+                "text": "Enable server access logging to a separate log bucket."
+              },
+              "properties": {
+                "security-severity": "3.0"
+              }
+            },
+            {
+              "id": "CCA-024",
+              "name": "S3bucketwithoutacustomer-managedKMSkey",
+              "shortDescription": {
+                "text": "S3 bucket without a customer-managed KMS key"
+              },
+              "fullDescription": {
+                "text": "AWS encrypts new objects by default (since January 2023), but a KMS key adds access control and an audit trail on the key."
+              },
+              "help": {
+                "text": "Configure default encryption with sse_algorithm = aws:kms and your own key."
+              },
+              "properties": {
+                "security-severity": "3.0"
+              }
+            },
+            {
+              "id": "CCA-030",
+              "name": "Databasepubliclyaccessible",
+              "shortDescription": {
+                "text": "Database publicly accessible"
+              },
+              "fullDescription": {
+                "text": "Puts the database directly on the internet, one weak password away from a breach."
+              },
+              "help": {
+                "text": "Set publicly_accessible = false and reach it through the application or a bastion."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-031",
+              "name": "Databasestoragenotencrypted",
+              "shortDescription": {
+                "text": "Database storage not encrypted"
+              },
+              "fullDescription": {
+                "text": "Snapshots, backups and disks expose data in plain form if copied."
+              },
+              "help": {
+                "text": "Set storage_encrypted = true (ideally with your own KMS key)."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-032",
+              "name": "Databasebackupsdisabled",
+              "shortDescription": {
+                "text": "Database backups disabled"
+              },
+              "fullDescription": {
+                "text": "No automated backups means no recovery after deletion, corruption or ransomware."
+              },
+              "help": {
+                "text": "Set backup_retention_period to at least 7 days."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-040",
+              "name": "EBSvolumenotencrypted",
+              "shortDescription": {
+                "text": "EBS volume not encrypted"
+              },
+              "fullDescription": {
+                "text": "Unencrypted disks and their snapshots expose data if copied or shared."
+              },
+              "help": {
+                "text": "Set encrypted = true, or turn on EBS encryption by default for the account."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-041",
+              "name": "Snapshotofanunencryptedvolume",
+              "shortDescription": {
+                "text": "Snapshot of an unencrypted volume"
+              },
+              "fullDescription": {
+                "text": "The snapshot inherits the lack of encryption and is easy to share by mistake."
+              },
+              "help": {
+                "text": "Encrypt the source volume, or copy the snapshot with encryption on."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-042",
+              "name": "InstancemetadataallowsIMDSv1",
+              "shortDescription": {
+                "text": "Instance metadata allows IMDSv1"
+              },
+              "fullDescription": {
+                "text": "IMDSv1 lets server-side request forgery (SSRF) bugs read the instance's temporary AWS credentials."
+              },
+              "help": {
+                "text": "Set metadata_options { http_tokens = \"required\" } to enforce IMDSv2."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-050",
+              "name": "Over-broadIAMpolicy",
+              "shortDescription": {
+                "text": "Over-broad IAM policy"
+              },
+              "fullDescription": {
+                "text": "Wildcard permissions break least privilege: one stolen credential can do almost anything."
+              },
+              "help": {
+                "text": "List only the specific actions and resources the role needs."
+              },
+              "properties": {
+                "security-severity": "8.0"
+              }
+            },
+            {
+              "id": "CCA-051",
+              "name": "IAMpolicyattacheddirectlytoauser",
+              "shortDescription": {
+                "text": "IAM policy attached directly to a user"
+              },
+              "fullDescription": {
+                "text": "Per-user permissions are hard to review and are often forgotten when people leave."
+              },
+              "help": {
+                "text": "Attach policies to groups or roles and put users in groups."
+              },
+              "properties": {
+                "security-severity": "3.0"
+              }
+            },
+            {
+              "id": "CCA-052",
+              "name": "Long-livedIAMaccesskeyinTerraform",
+              "shortDescription": {
+                "text": "Long-lived IAM access key in Terraform"
+              },
+              "fullDescription": {
+                "text": "The secret key is written to the Terraform state file in plain text."
+              },
+              "help": {
+                "text": "Use IAM roles or AWS IAM Identity Center (SSO) instead of access keys."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-060",
+              "name": "KMSkeyrotationdisabled",
+              "shortDescription": {
+                "text": "KMS key rotation disabled"
+              },
+              "fullDescription": {
+                "text": "Long-lived keys increase the damage if a key is ever exposed."
+              },
+              "help": {
+                "text": "Set enable_key_rotation = true."
+              },
+              "properties": {
+                "security-severity": "3.0"
+              }
+            },
+            {
+              "id": "CCA-061",
+              "name": "Searchdomainnotencryptedatrest",
+              "shortDescription": {
+                "text": "Search domain not encrypted at rest"
+              },
+              "fullDescription": {
+                "text": "Indexed data (often logs or customer records) is stored unencrypted."
+              },
+              "help": {
+                "text": "Enable encrypt_at_rest."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-062",
+              "name": "LoadbalancerwithoutTLS",
+              "shortDescription": {
+                "text": "Load balancer without TLS"
+              },
+              "fullDescription": {
+                "text": "Traffic between users and the service can be read or altered in transit."
+              },
+              "help": {
+                "text": "Use an HTTPS/TLS listener with an ACM certificate and redirect HTTP to HTTPS."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-063",
+              "name": "KubernetesAPIendpointpublic",
+              "shortDescription": {
+                "text": "Kubernetes API endpoint public"
+              },
+              "fullDescription": {
+                "text": "Exposes the cluster's control plane to the whole internet."
+              },
+              "help": {
+                "text": "Set endpoint_public_access = false, or restrict public_access_cidrs."
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CCA-064",
+              "name": "Weakcontainerregistrysettings",
+              "shortDescription": {
+                "text": "Weak container registry settings"
+              },
+              "fullDescription": {
+                "text": "Mutable tags and no scanning make it easier to ship a tampered or vulnerable image."
+              },
+              "help": {
+                "text": "Set image_tag_mutability = IMMUTABLE and scan_on_push = true."
+              },
+              "properties": {
+                "security-severity": "3.0"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CCA-001",
+          "level": "error",
+          "message": {
+            "text": "aws_instance.web_host: AWS access key AKIA...MAAA written in plain text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-001",
+          "level": "error",
+          "message": {
+            "text": "aws_lambda_function.analysis_lambda: AWS access key AKIA...MPLE written in plain text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "lambda.tf"
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-001",
+          "level": "error",
+          "message": {
+            "text": "provider.aws.plain_text_access_keys_provider: AWS access key AKIA...MPLE written in plain text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "providers.tf"
+                },
+                "region": {
+                  "startLine": 8
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-001",
+          "level": "error",
+          "message": {
+            "text": "provider.aws.plain_text_access_keys_provider: AWS secret key written in plain text in the provider block"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "providers.tf"
+                },
+                "region": {
+                  "startLine": 8
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-003",
+          "level": "error",
+          "message": {
+            "text": "aws_lambda_function.analysis_lambda: environment variable 'access_key' holds a plain-text secret"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "lambda.tf"
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-003",
+          "level": "error",
+          "message": {
+            "text": "aws_lambda_function.analysis_lambda: environment variable 'secret_key' holds a plain-text secret"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "lambda.tf"
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-004",
+          "level": "error",
+          "message": {
+            "text": "aws_instance.db_app: start-up script embeds the secret ${var.password}, which Terraform renders into user data in plain text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "db-app.tf"
+                },
+                "region": {
+                  "startLine": 243
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-004",
+          "level": "error",
+          "message": {
+            "text": "aws_instance.web_host: start-up script sets 'secret' in plain text"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-010",
+          "level": "error",
+          "message": {
+            "text": "aws_security_group.web-node: SSH (port 22) open to the whole internet"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 77
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-030",
+          "level": "error",
+          "message": {
+            "text": "aws_db_instance.default: database is reachable from the internet (publicly_accessible = true)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "db-app.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-050",
+          "level": "error",
+          "message": {
+            "text": "aws_iam_role_policy.ec2policy: allows all actions in ec2:*, rds:*, s3:* on every resource"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "db-app.tf"
+                },
+                "region": {
+                  "startLine": 206
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-050",
+          "level": "error",
+          "message": {
+            "text": "aws_iam_user_policy.userpolicy: allows all actions in cloudwatch:*, ec2:*, lambda:*, s3:* on every resource"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "iam.tf"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-021",
+          "level": "warning",
+          "message": {
+            "text": "aws_s3_bucket.data: no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-021",
+          "level": "warning",
+          "message": {
+            "text": "aws_s3_bucket.data_science: no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 89
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-021",
+          "level": "warning",
+          "message": {
+            "text": "aws_s3_bucket.financials: no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-021",
+          "level": "warning",
+          "message": {
+            "text": "aws_s3_bucket.flowbucket: no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 271
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-021",
+          "level": "warning",
+          "message": {
+            "text": "aws_s3_bucket.logs: no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 113
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-021",
+          "level": "warning",
+          "message": {
+            "text": "aws_s3_bucket.operations: no complete S3 Block Public Access configuration, so a later ACL or policy change could expose it"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_db_instance.default: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "db-app.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_neptune_cluster.default: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "neptune.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app1-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app2-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 17
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app3-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app4-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 49
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app5-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app6-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 81
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app7-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 97
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app8-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 113
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-031",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app9-rds-cluster: database storage is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 130
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-032",
+          "level": "warning",
+          "message": {
+            "text": "aws_db_instance.default: automated backups are disabled (backup_retention_period = 0)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "db-app.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-032",
+          "level": "warning",
+          "message": {
+            "text": "aws_rds_cluster.app1-rds-cluster: automated backups are disabled (backup_retention_period = 0)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "rds.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-040",
+          "level": "warning",
+          "message": {
+            "text": "aws_ebs_volume.web_host_storage: volume is not encrypted, so a snapshot or detached disk exposes its data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 34
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-041",
+          "level": "warning",
+          "message": {
+            "text": "aws_ebs_snapshot.example_snapshot: snapshot of the unencrypted volume aws_ebs_volume.web_host_storage, so the copy is unencrypted too"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 53
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-042",
+          "level": "warning",
+          "message": {
+            "text": "aws_instance.db_app: instance metadata allows IMDSv1, so an SSRF bug in the app could steal the instance's AWS credentials"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "db-app.tf"
+                },
+                "region": {
+                  "startLine": 243
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-042",
+          "level": "warning",
+          "message": {
+            "text": "aws_instance.web_host: instance metadata allows IMDSv1, so an SSRF bug in the app could steal the instance's AWS credentials"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-052",
+          "level": "warning",
+          "message": {
+            "text": "aws_iam_access_key.user: creates a long-lived access key; its secret is stored in plain text in the Terraform state file"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "iam.tf"
+                },
+                "region": {
+                  "startLine": 21
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-061",
+          "level": "warning",
+          "message": {
+            "text": "aws_elasticsearch_domain.monitoring-framework: search domain data is not encrypted at rest"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "es.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-062",
+          "level": "warning",
+          "message": {
+            "text": "aws_elb.weblb: load balancer listens without TLS, so traffic is readable in transit"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "elb.tf"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-063",
+          "level": "warning",
+          "message": {
+            "text": "aws_eks_cluster.eks_cluster: Kubernetes API endpoint is reachable from the internet (the default when not set)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "eks.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-022",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.data: versioning is off, so overwritten or deleted objects (e.g. by ransomware) can't be recovered"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-022",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.financials: versioning is off, so overwritten or deleted objects (e.g. by ransomware) can't be recovered"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-022",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.flowbucket: versioning is off, so overwritten or deleted objects (e.g. by ransomware) can't be recovered"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 271
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-023",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.data: access logging is off, so there's no record of who read or changed data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-023",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.financials: access logging is off, so there's no record of who read or changed data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-023",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.flowbucket: access logging is off, so there's no record of who read or changed data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 271
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-023",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.logs: access logging is off, so there's no record of who read or changed data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 113
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-023",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.operations: access logging is off, so there's no record of who read or changed data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-024",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.data: only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-024",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.data_science: only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 89
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-024",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.financials: only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-024",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.flowbucket: only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ec2.tf"
+                },
+                "region": {
+                  "startLine": 271
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-024",
+          "level": "note",
+          "message": {
+            "text": "aws_s3_bucket.operations: only AWS's default encryption (SSE-S3): no customer-managed KMS key to control or audit access to the data"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "s3.tf"
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-051",
+          "level": "note",
+          "message": {
+            "text": "aws_iam_user_policy.userpolicy: permissions attached straight to a user instead of a group or role, which is hard to review and revoke"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "iam.tf"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-060",
+          "level": "note",
+          "message": {
+            "text": "aws_kms_key.logs_key: automatic key rotation is off"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "kms.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-064",
+          "level": "note",
+          "message": {
+            "text": "aws_ecr_repository.repository: image tags can be overwritten, so a tag like 'latest' could be swapped for a malicious image"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ecr.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CCA-064",
+          "level": "note",
+          "message": {
+            "text": "aws_ecr_repository.repository: images aren't scanned for vulnerabilities on push"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "ecr.tf"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

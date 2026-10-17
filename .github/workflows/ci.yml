@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Fetch TerraGoat (pinned commit)
+        run: |
+          git clone --quiet https://github.com/bridgecrewio/terragoat evaluation/data/terragoat
+          git -C evaluation/data/terragoat checkout --quiet 729f8da62c6a85ce4af5ad3d123de97776d954c4
+      - name: Evaluation must still catch every labelled flaw
+        run: python -m evaluation.evaluate --require-all-labels
